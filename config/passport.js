@@ -1,9 +1,8 @@
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 const User = require("../models/User");
-const os = require("os"); // 1. Import the OS module
+const os = require("os");
 
-// 2. Add your environment platform flag
 const isProduction = os.platform() === "linux";
 
 passport.use(
