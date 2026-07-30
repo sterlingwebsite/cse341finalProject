@@ -1,13 +1,18 @@
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 const User = require("../models/User");
+const os = require("os");
+
+const isProduction = os.platform() === "linux";
 
 passport.use(
   new GitHubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback",
+      callbackURL: isProduction
+        ? "https://cse341finalproject-mn1w.onrender.com/auth/github/callback"
+        : "http://localhost:3000/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
