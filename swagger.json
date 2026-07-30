@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Clinic Management API",
-    "description": "API Authentication Hub. \n    \n[👉 Click here to Login with GitHub](http://localhost:3000/auth/github) | [Logout](http://localhost:3000/auth/logout)",
+    "description": "API Authentication Hub. \n    \n[Click here to Login with GitHub](http://localhost:3000/auth/github) | [Logout](http://localhost:3000/auth/logout)",
     "version": "1.0.0"
   },
   "host": "localhost:3000",

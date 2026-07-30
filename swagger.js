@@ -3,13 +3,16 @@ const swaggerAutogen = require("swagger-autogen")();
 const os = require("os");
 
 const isProduction = os.platform() === "linux";
+const baseUrl = isProduction
+  ? "https://cse341finalproject-mn1w.onrender.com"
+  : "http://localhost:3000";
 
 const doc = {
   info: {
     title: "Clinic Management API",
     description: `API Authentication Hub. 
     
-[👉 Click here to Login with GitHub](http://localhost:3000/auth/github) | [Logout](http://localhost:3000/auth/logout)`,
+[Click here to Login with GitHub](${baseUrl}/auth/github) | [Logout](${baseUrl}/auth/logout)`,
   },
 
   host: isProduction
