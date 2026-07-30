@@ -3,6 +3,8 @@ const express = require("express");
 const userRoutes = require("../routes/users");
 const User = require("../models/User");
 
+process.env.NODE_ENV = "test";
+
 const app = express();
 app.use(express.json());
 app.use("/users", userRoutes);
@@ -18,7 +20,8 @@ describe("Users API - Unit Tests", () => {
     const mockUsers = [
       { _id: "1", name: "Sterling", email: "sterling@test.com", role: "admin" },
     ];
-    User.find.mockResolvedValue(mockUsers);
+
+    User.find = jest.fn().mockResolvedValue(mockUsers);
 
     const res = await request(app).get("/users");
 
