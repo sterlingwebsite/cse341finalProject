@@ -1,15 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-
-const isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated && req.isAuthenticated()) {
-    return next();
-  }
-  return res
-    .status(401)
-    .json({ message: "Unauthorized: Please log in via OAuth." });
-};
+const { isAuthenticated } = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Users']
@@ -79,8 +71,7 @@ router.put("/:id", isAuthenticated, async (req, res) => {
   }
 });
 
-// DELETE a user
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   // #swagger.tags = ['Users']
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);

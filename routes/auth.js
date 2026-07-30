@@ -5,6 +5,7 @@ const passport = require("passport");
 router.get(
   "/github",
   // #swagger.tags = ['Authentication']
+  // #swagger.ignore = true
   // #swagger.description = 'Redirects directly to GitHub to authorize the browser session.'
   passport.authenticate("github", { scope: ["user:email"] }),
 );
@@ -21,6 +22,7 @@ router.get(
 
 router.get("/logout", (req, res, next) => {
   // #swagger.tags = ['Authentication']
+  // #swagger.ignore = true
   // #swagger.description = 'Clears the session cookies and revokes local authorization.'
   req.logout((err) => {
     if (err) {
