@@ -45,6 +45,7 @@ app.use("/patients", require("./routes/patients"));
 app.use("/doctors", require("./routes/doctors"));
 app.use("/auth", require("./routes/auth"));
 app.use("/users", require("./routes/users"));
+app.use("/appointments", require("./routes/appointments"));
 
 mongoose
   .connect(process.env.MONGODB_URI)
