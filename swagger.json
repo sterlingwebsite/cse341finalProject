@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Clinic Management API",
-    "description": "API documentation for managing patients, doctors, and appointments.",
+    "description": "API Authentication Hub. \n    \n[👉 Click here to Login with GitHub](http://localhost:3000/auth/github) | [Logout](http://localhost:3000/auth/logout)",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -10,6 +10,14 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "cookieAuth": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "connect.sid",
+      "description": "1. Click the Login link above. 2. Authenticate. 3. Return here and your cookie is automatically attached!"
+    }
+  },
   "paths": {
     "/patients/": {
       "get": {
@@ -76,6 +84,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -163,6 +174,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           }
@@ -184,6 +198,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -259,6 +276,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -346,6 +366,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           }
@@ -368,6 +391,383 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "User Information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "githubId": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Jane Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "jane@example.com"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "staff"
+                }
+              },
+              "required": [
+                "githubId",
+                "name",
+                "email",
+                "role"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Updated User Information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "githubId": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Jane Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "jane@example.com"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "doctor"
+                }
+              },
+              "required": [
+                "githubId",
+                "name",
+                "email",
+                "role"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appointments/": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Appointments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Appointment Information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "patientId": {
+                  "type": "string",
+                  "example": "60d5ec854f1a253a4c8b4567"
+                },
+                "doctorId": {
+                  "type": "string",
+                  "example": "60d5ec854f1a253a4c8b4589"
+                },
+                "appointmentDate": {
+                  "type": "string",
+                  "example": "2026-10-15T14:30:00.000Z"
+                },
+                "reason": {
+                  "type": "string",
+                  "example": "Annual physical examination checkup."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Scheduled"
+                }
+              },
+              "required": [
+                "patientId",
+                "doctorId",
+                "appointmentDate",
+                "reason",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/appointments/{id}": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Appointments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Updated Appointment Information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "patientId": {
+                  "type": "string",
+                  "example": "60d5ec854f1a253a4c8b4567"
+                },
+                "doctorId": {
+                  "type": "string",
+                  "example": "60d5ec854f1a253a4c8b4589"
+                },
+                "appointmentDate": {
+                  "type": "string",
+                  "example": "2026-10-15T15:00:00.000Z"
+                },
+                "reason": {
+                  "type": "string",
+                  "example": "Follow-up consultation regarding test results."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Scheduled"
+                }
+              },
+              "required": [
+                "patientId",
+                "doctorId",
+                "appointmentDate",
+                "reason",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Appointments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -377,5 +777,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
 }

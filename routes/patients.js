@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Patient = require("../models/Patient");
+const { isAuthenticated } = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Patients']
@@ -23,7 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
   // #swagger.tags = ['Patients']
   /*  #swagger.parameters['obj'] = {
         in: 'body',
@@ -44,7 +45,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAuthenticated, async (req, res) => {
   // #swagger.tags = ['Patients']
   /*  #swagger.parameters['obj'] = {
         in: 'body',
@@ -71,7 +72,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   // #swagger.tags = ['Patients']
   try {
     const deletedPatient = await Patient.findByIdAndDelete(req.params.id);
