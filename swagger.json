@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Clinic Management API",
-    "description": "API Authentication Hub",
+    "description": "API Authentication Hub. \n    \n[👉 Click here to Login with GitHub](http://localhost:3000/auth/github) | [Logout](http://localhost:3000/auth/logout)",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -11,11 +11,11 @@
     "http"
   ],
   "securityDefinitions": {
-    "githubOAuth": {
-      "type": "oauth2",
-      "authorizationUrl": "http://localhost:3000/auth/github",
-      "flow": "implicit",
-      "description": "Log in via GitHub OAuth to access protected POST and PUT endpoints."
+    "cookieAuth": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "connect.sid",
+      "description": "1. Click the Login link above. 2. Authenticate. 3. Return here and your cookie is automatically attached!"
     }
   },
   "paths": {
@@ -591,8 +591,9 @@
       }
     }
   },
-  "externalDocs": {
-    "description": "\n    [Login with GitHub](http://localhost:3000/auth/github)\n\n    [Logout](http://localhost:3000/auth/logout)\n        ",
-    "url": "http://localhost:3000"
-  }
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
 }

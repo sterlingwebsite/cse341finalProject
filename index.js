@@ -25,6 +25,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const swaggerOptions = {
+  swaggerOptions: {
+    withCredentials: true,
+  },
+};
+
 app.use(
   "/api-docs",
   (req, res, next) => {
@@ -32,7 +38,7 @@ app.use(
     next();
   },
   swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument),
+  swaggerUi.setup(swaggerDocument, swaggerOptions),
 );
 
 app.use("/patients", require("./routes/patients"));
