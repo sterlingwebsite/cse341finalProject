@@ -30,7 +30,7 @@ router.post("/", isAuthenticated, async (req, res) => {
   /*  #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Patient Information',
-        schema: { $firstName: 'John', $lastName: 'Doe', $birthDate: '1990-01-01', $phone: '123-456-7890', $email: 'john@example.com' }
+        schema: { $firstName: 'John', $lastName: 'Doe', $birthDate: '1990-01-01', $phone: '123-456-7890', $email: 'john@example.com', $gender: 'Male', $emergencyContact: 'Jane Doe 123-456-7899' }
   } */
   try {
     const newPatient = new Patient(req.body);
@@ -51,7 +51,7 @@ router.put("/:id", isAuthenticated, async (req, res) => {
   /*  #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Updated Patient Information',
-        schema: { $firstName: 'John', $lastName: 'Doe', $birthDate: '1990-01-01', $phone: '123-456-7890', $email: 'john@example.com' }
+        schema: { $firstName: 'John', $lastName: 'Doe', $birthDate: '1990-01-01', $phone: '123-456-7890', $email: 'john@example.com', $gender: 'Male', $emergencyContact: 'Jane Doe 123-456-7899' }
   } */
   try {
     const updatedPatient = await Patient.findByIdAndUpdate(
