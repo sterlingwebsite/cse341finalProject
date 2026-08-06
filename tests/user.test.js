@@ -1,3 +1,4 @@
+// tests/user.test.js
 const request = require("supertest");
 const express = require("express");
 const userRoutes = require("../routes/users");
@@ -28,5 +29,30 @@ describe("Users API - Unit Tests", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveLength(1);
     expect(res.body[0].name).toBe("Sterling");
+  });
+
+  it("GET /users/:id should return a specific user by id", async () => {
+    const mockUser = {
+      _id: "1",
+      name: "Sterling",
+      email: "sterling@test.com",
+      role: "admin",
+    };
+
+    User.findById = jest.fn().mockResolvedValue(mockUser);
+
+    const res = await request(app).get("/users/1");
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.name).toBe("Sterling");
+    expect(res.body._id).toBe("1");
+  });
+
+  it("GET /users/:id should return 404 if user does not exist", async () => {
+    User.findById = jest.fn().mockResolvedValue(null);
+
+    const res = await request(app).get("/users/999");
+
+    expect(res.statusCode).toEqual(404);
   });
 });
