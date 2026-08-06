@@ -1,3 +1,4 @@
+// models/Patient.js
 const mongoose = require("mongoose");
 
 const PatientSchema = new mongoose.Schema(
@@ -40,6 +41,16 @@ const PatientSchema = new mongoose.Schema(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please provide a valid email address",
       ],
+    },
+    gender: {
+      type: String,
+      required: [true, "Gender selection is required"],
+      enum: ["Male", "Female"],
+    },
+    emergencyContact: {
+      type: String,
+      required: [true, "Emergency contact name and phone number are required"],
+      trim: true,
     },
   },
   { timestamps: true },
